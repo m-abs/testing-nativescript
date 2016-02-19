@@ -1,0 +1,22 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
+  <Page.actionBar>
+    <ActionBar title="{{ message }}">
+      <ActionBar.titleView>
+        <StackLayout
+              orientation="horizontal"
+              ios:horizontalAlignment="center"
+              android:horizontalAlignment="left"
+        >
+          <Button text="&#xf04b;" class="font-awesome" />
+          <Button text="2nd" class="font-awesome" />
+          <Button text="3rd" class="font-awesome" />
+        </StackLayout>
+      </ActionBar.titleView>
+    </ActionBar>
+  </Page.actionBar>
+  <StackLayout>
+    <Label text="Tap the button" class="title"/>
+    <Button text="TAP" tap="{{ tapAction }}" />
+    <Label text="{{ message }}" class="message" textWrap="true"/>
+  </StackLayout>
+</Page>
