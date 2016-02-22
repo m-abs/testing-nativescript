@@ -1,22 +1,22 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
   <Page.actionBar>
-    <ActionBar title="{{ message }}">
-      <ActionBar.titleView>
-        <StackLayout
-              orientation="horizontal"
-              ios:horizontalAlignment="center"
-              android:horizontalAlignment="left"
-        >
-          <Button text="&#xf04b;" class="font-awesome" />
-          <Button text="2nd" class="font-awesome" />
-          <Button text="3rd" class="font-awesome" />
-        </StackLayout>
-      </ActionBar.titleView>
-    </ActionBar>
+    <ActionBar title="{{ message }}" />
   </Page.actionBar>
-  <StackLayout>
-    <Label text="Tap the button" class="title"/>
-    <Button text="TAP" tap="{{ tapAction }}" />
-    <Label text="{{ message }}" class="message" textWrap="true"/>
-  </StackLayout>
+  <GridLayout rows="auto, auto" columns="*, *">
+    <StackLayout orientation="horizontal" col="0" row="0" colSpan="2">
+      <Button class="font-awesome status-{{ status }}" id="play-pause" text="Play" />
+      <Button class="font-awesome" id="stop" text="Stop" />
+    </StackLayout>
+
+    <GridLayout rows="auto, *" row="1" col="0">
+      <Label text="Wrapped Layout" horizontalAlignment="center" />
+      <WrapLayout row="1" >
+        <Button text="W-01" />
+        <Button text="W-02" />
+        <Button text="W-03" />
+        <Button text="W-04" />
+        <Button text="W-05" />
+      </WrapLayout>
+    </GridLayout>
+  </GridLayout>
 </Page>
