@@ -7,9 +7,13 @@ import {
 
 import * as timer from "timer";
 
+import {WebView} from "ui/web-view";
+
 import {Sound} from "../../shared/sound";
 
 let myPlayer: Sound;
+
+let webView;
 
 function zeroPadding(n: number) {
   return `00${n}`.substr(-2);
@@ -46,8 +50,9 @@ const interval = timer.setInterval(() => {
 
 export function pageLoaded(args) {
   const page: Page = args.object;
-
   page.bindingContext = data;
+
+  webView = page.getViewById("book-content");
 }
 
 export function play() {

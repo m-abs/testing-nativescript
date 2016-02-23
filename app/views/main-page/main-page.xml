@@ -13,5 +13,7 @@
       <Label text=" / " />
       <Label text="{{ duration, duration | times }}" />
     </StackLayout>
+
+    <WebView id="book-content" src="~/www/content.html" row="2" colSpan="2" />
   </GridLayout>
 </Page>
