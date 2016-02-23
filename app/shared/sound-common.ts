@@ -1,32 +1,41 @@
-var fs = require("file-system");
-var types = require("utils/types");
+'use strict';
 
-var Sound = (function () {
-    function Sound() {
-        if (arguments.length === 1) {
-            var arg = arguments[0];
-            var path = types.isString(arg) ? arg.trim() : "";
+import * as fs from "file-system";
+import * as types from "utils/types";
 
-            if (path.indexOf("~/") === 0) {
-                path = fs.path.join(fs.knownFolders.currentApp().path, path.replace("~/", ""));
-            }
-            var documents = fs.knownFolders.currentApp();
-            console.log('folder:', documents.path);
-            fs.Folder.fromPath(fs.path.join(documents.path, '')).eachEntity(function (entity) {
-                console.log('-', entity.name);
-                // Return true to continue, or return false to stop the iteration.
-                return true;
-            });
-            console.log('path', path);
+export abstract class Sound {
+  protected player: any;
 
-            if (!fs.File.exists(path)) {
-                console.error("Sound not initialized; file not found.");
-                return;
-            }
-
-            this._path = path;
-        }
+  constructor(protected path: string) {
+    if (path.indexOf("~/") === 0) {
+      path = fs.path.join(fs.knownFolders.currentApp().path, path.replace("~/", ""));
     }
-    return Sound;
-})();
-exports.Sound = Sound;
+
+    const documents = fs.knownFolders.currentApp();
+
+    console.log('folder:', documents.path);
+
+    fs.Folder.fromPath(fs.path.join(documents.path, '')).eachEntity(function (entity) {
+      console.log('-', entity.name);
+      // Return true to continue, or return false to stop the iteration.
+      return true;
+    });
+    console.log('path', path);
+
+    if (!fs.File.exists(path)) {
+      console.error("Sound not initialized; file not found.");
+      return;
+    }
+  };
+
+  abstract play(): void;
+  abstract pause(): void;
+  abstract stop(): void;
+  abstract isPlaying(): boolean;
+  abstract seekTo(milliseconds: number): void;
+  abstract release(): void;
+  abstract getDuration(): number;
+  abstract getCurrentPosition(): number;
+  abstract setRate(rate: number): number;
+  abstract getRate(): number;
+};

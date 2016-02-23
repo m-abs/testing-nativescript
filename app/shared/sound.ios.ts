@@ -1,53 +1,67 @@
-var common = require("./sound-common");
+'use strict';
 
-var Sound = (function (_super) {
-    __extends(Sound, _super);
-    function Sound() {
-        _super.apply(this, arguments);
+import * as common from "./sound-common";
 
-        this._url = NSURL.fileURLWithPath(this._path);
-        this._player = new AVAudioPlayer();
-        this._player.initWithContentsOfURLError(this._url);
-        this._player.enableRate = true;
-        this._player.prepareToPlay();
-    }
-    Sound.prototype.play = function () {
-        this._player.play();
-    };
-    Sound.prototype.pause = function () {
-        this._player.pause();
-    };
-    Sound.prototype.stop = function () {
-        this._player.stop();
-    };
-    Sound.prototype.isPlaying = function () {
-        this._player.playing;
-    };
-    Sound.prototype.seekTo = function (milis) {
-        this._player.currentTime = milis / 1000;
-    };
-    Sound.prototype.release = function () {
-        this._player.release();
-        this._player = null;
-    };
-    Sound.prototype.getDuration = function() {
-        return this._player.duration * 1000;
-    };
-    Sound.prototype.getCurrentPosition = function() {
-        return this._player.currentTime * 1000;
-    };
-    Sound.prototype.setRate = function(rate) {
-        console.assert(0.5 <= rate && rate <= 2);
-        this._player.rate = rate;
-        return true;
-    };
-    Sound.prototype.getRate = function() {
-        return this._player.rate;
-    }
-    return Sound;
-})(common.Sound);
-exports.Sound = Sound;
+declare var NSURL: any;
+declare var AVAudioPlayer: any;
 
-exports.create = function(path) {
-    return new Sound(path);
+export class Sound extends common.Sound {
+  private url: any;
+
+  constructor(path: string) {
+    super(path);
+
+    this.url = NSURL.fileURLWithPath(this.path);
+    this.player = new AVAudioPlayer();
+    this.player.initWithContentsOfURLError(this.url);
+    this.player.enableRate = true;
+    this.player.prepareToPlay();
+  };
+
+  play() {
+    this.player.play();
+  };
+
+  pause() {
+    this.player.pause();
+  };
+
+  stop() {
+    this.player.stop();
+  };
+
+  isPlaying(): boolean {
+    return this.player.playing;
+  };
+
+  seekTo(milis) {
+    this.player.currentTime = milis / 1000;
+  };
+
+  release() {
+    this.player.release();
+    this.player = null;
+  };
+
+  getDuration() {
+    return this.player.duration * 1000;
+  };
+
+  getCurrentPosition() {
+    return this.player.currentTime * 1000;
+  };
+
+  setRate(rate) {
+    console.assert(0.5 <= rate && rate <= 2);
+    this.player.rate = rate;
+    return this.getRate();
+  };
+
+  getRate() {
+    return this.player.rate;
+  };
+};
+
+export function create(path) {
+  return new Sound(path);
 };
