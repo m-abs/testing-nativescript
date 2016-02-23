@@ -3,12 +3,12 @@
 import * as fs from "file-system";
 import * as types from "utils/types";
 
-export abstract class Sound {
+export class Sound {
   protected player: any;
 
   constructor(protected path: string) {
     if (path.indexOf("~/") === 0) {
-      path = fs.path.join(fs.knownFolders.currentApp().path, path.replace("~/", ""));
+      this.path = path = fs.path.join(fs.knownFolders.currentApp().path, path.replace("~/", ""));
     }
 
     const documents = fs.knownFolders.currentApp();
@@ -20,7 +20,6 @@ export abstract class Sound {
       // Return true to continue, or return false to stop the iteration.
       return true;
     });
-    console.log('path', path);
 
     if (!fs.File.exists(path)) {
       console.error("Sound not initialized; file not found.");
@@ -28,14 +27,35 @@ export abstract class Sound {
     }
   };
 
-  abstract play(): void;
-  abstract pause(): void;
-  abstract stop(): void;
-  abstract isPlaying(): boolean;
-  abstract seekTo(milliseconds: number): void;
-  abstract release(): void;
-  abstract getDuration(): number;
-  abstract getCurrentPosition(): number;
-  abstract setRate(rate: number): number;
-  abstract getRate(): number;
+  play(): void {
+    throw Error('not implemented');
+  };
+
+  pause(): void {
+    throw Error('not implemented');
+  };
+  stop(): void {
+    throw Error('not implemented');
+  };
+  isPlaying(): boolean {
+    throw Error('not implemented');
+  };
+  seekTo(milliseconds: number): void {
+    throw Error('not implemented');
+  };
+  release(): void {
+    throw Error('not implemented');
+  };
+  getDuration(): number {
+    throw Error('not implemented');
+  };
+  getCurrentPosition(): number {
+    throw Error('not implemented');
+  };
+  setRate(rate: number): number {
+    throw Error('not implemented');
+  };
+  getRate(): number {
+    throw Error('not implemented');
+  };
 };

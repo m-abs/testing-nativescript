@@ -35,6 +35,7 @@ export class Sound extends common.Sound {
     this.session.setFlags(MediaSession.FLAG_HANDLES_MEDIA_BUTTONS | MediaSession.FLAG_HANDLES_TRANSPORT_CONTROLS);
     this.session.setCallback(new MyMediaSessionCallback);
     this.session.setActive(true);
+
     this.player = android.media.MediaPlayer.create(app.android.context, android.net.Uri.parse(this.path));
   };
 

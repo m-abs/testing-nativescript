@@ -1,3 +1,5 @@
+'use strict';
+
 import { Observable, PropertyChangeData } from "data/observable";
 
 export class HelloWorldModel extends Observable {

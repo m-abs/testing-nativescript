@@ -2,21 +2,16 @@
   <Page.actionBar>
     <ActionBar title="{{ message }}" />
   </Page.actionBar>
-  <GridLayout rows="auto, auto" columns="*, *">
+  <GridLayout rows="auto, auto, auto" columns="*, *">
     <StackLayout orientation="horizontal" col="0" row="0" colSpan="2">
-      <Button class="font-awesome status-{{ status }}" id="play-pause" text="Play" />
-      <Button class="font-awesome" id="stop" text="Stop" />
+      <Button class="font-awesome" id="play-pause" text="&#xf04b;" tap="play" />
+      <Button class="font-awesome" id="stop" text="&#xf04d;" tap="stop" />
     </StackLayout>
 
-    <GridLayout rows="auto, *" row="1" col="0">
-      <Label text="Wrapped Layout" horizontalAlignment="center" />
-      <WrapLayout row="1" >
-        <Button text="W-01" />
-        <Button text="W-02" />
-        <Button text="W-03" />
-        <Button text="W-04" />
-        <Button text="W-05" />
-      </WrapLayout>
-    </GridLayout>
+    <StackLayout orientation="horizontal" col="0" row="1" colSpan="2" visibility="{{ duration ? 'visible' : 'collapse' }}">
+      <Label text="{{ position, position | times }}" />
+      <Label text=" / " />
+      <Label text="{{ duration, duration | times }}" />
+    </StackLayout>
   </GridLayout>
 </Page>
