@@ -2,7 +2,7 @@
   <Page.actionBar>
     <ActionBar title="{{ message }}" />
   </Page.actionBar>
-  <GridLayout rows="auto, auto, auto" columns="*, *">
+  <GridLayout rows="auto, auto, *" columns="*, *">
     <StackLayout orientation="horizontal" col="0" row="0" colSpan="2">
       <Button class="font-awesome" id="play-pause" text="&#xf04b;" tap="play" />
       <Button class="font-awesome" id="stop" text="&#xf04d;" tap="stop" />
@@ -14,6 +14,6 @@
       <Label text="{{ duration, duration | times }}" />
     </StackLayout>
 
-    <WebView id="book-content" src="~/www/content.html" row="2" colSpan="2" />
+    <WebView id="book-content" src="~/www/content.html" row="2" colSpan="2"/>
   </GridLayout>
 </Page>
